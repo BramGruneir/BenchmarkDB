@@ -51,7 +51,7 @@ import seaborn
 import pandas as pd
 import numpy as np
 import matplotlib
-matplotlib.use('Agg')
+# matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from os import getcwd, listdir, makedirs
@@ -418,10 +418,13 @@ class Benchmark():
         if not rolling_range:
             rolling_range = self.trials / 10
 
+        """
         rolling_avg = pd.stats.moments.rolling_mean(
             dataframe,
             rolling_range,
         )
+        """
+        rolling_avg = dataframe.rolling(window=rolling_range).mean()
 
         return rolling_avg
 
