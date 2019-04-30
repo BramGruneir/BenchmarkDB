@@ -29,22 +29,22 @@ class Benchmark():
         self.connections = {}
         self.cursors = {}
 
-        self.insert_statement = """INSERT INTO test (Index, Number, Info)
+        self.insert_statement = """INSERT INTO test (Idx, Number, Info)
                                        VALUES (
                                            {Index},
                                            {Number},
                                            {Info!r}
                                        );"""
 
-        self.delete_statement = 'DROP TABLE {table} cascade'
+        self.delete_statement = 'DROP TABLE IF EXISTS {table} CASCADE'
 
         self.create_statement = """CREATE TABLE test (
-                                       Index   INTEGER PRIMARY KEY,
+                                       Idx   INTEGER PRIMARY KEY,
                                        Number  BIGINT,
                                        Info    TEXT
                                    );"""
 
-        self.select_statement = 'SELECT * from test WHERE Index = {index};'
+        self.select_statement = 'SELECT * from test WHERE Idx = {index};'
 
         if setup:
             self.setup(collection)
@@ -74,6 +74,7 @@ class Benchmark():
                 'POSTGRESQL_{node}'.format(node=node)
             ]
 
+            print(collection)
             current_conn = psycopg2.connect(
                 host=current_host,
                 port=POSTGRESQL_PORT,
@@ -176,4 +177,6 @@ class Benchmark():
         :return:
         """
 
+        """
         self.cursors[node].execute('commit;')
+        """
