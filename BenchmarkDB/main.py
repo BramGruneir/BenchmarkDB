@@ -35,6 +35,7 @@ a markdown file to keep a record of.
                                 [default: 10]
         --trials=<n>        Specify the number of reads and writes to make to
                                 the DB to collect data on [default: 1000]
+        --testcase=<n>      Specify the test case number.
 """
 
 from __future__ import absolute_import
@@ -121,18 +122,19 @@ class Benchmark():
         self.trials = int(options.get('--trials'))
 
         if self.options.get('--no-split'):
-
             self.split = False
-
         else:
-
             self.split = True
+
+        if not options.get('--testcase'):
+            options['--testcase'] = 1
+        self.testcase = int(options.get('--testcase'))
 
         self.write_times = []
         self.read_times = []
 
         self.time_and_date = time.strftime("%a, %d %b, %Y at %H:%M:%S")
-        self.report_date = time.strftime("%b%d-%Y--%H-%M")
+        self.report_date = time.strftime("%b%d-%Y--%H-%M-%S")
 
         if setup:
             self.setup()
@@ -153,7 +155,7 @@ class Benchmark():
 
             self.module = self.__register_module(self.db_name)
             self.database_client = self.module[0].Benchmark(
-                self.collection, setup=True, trials=self.trials
+                self.collection, setup=True, trials=self.trials, testcase=self.testcase,
             )
 
             module_settings = self.module[1]

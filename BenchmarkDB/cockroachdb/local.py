@@ -1,14 +1,20 @@
 """
-All settings for the postgreSQL module
+All settings for the cockroach module
 """
 
-POSTGRESQL_NODES = {
-    'POSTGRESQL_1': 'localhost',
+COCKROACH_NODES = {
+    'COCKROACH_1': 'localhost',
+    'COCKROACH_2': 'localhost',
+    'COCKROACH_3': 'localhost',
 }
 
-POSTGRESQL_PORT = 26257
+COCKROACH_PORTS = {
+    'COCKROACH_1': 26257,
+    'COCKROACH_2': 26259,
+    'COCKROACH_3': 26261,
+}
 
-POSTGRESQL_USER = 'root'
-POSTGRESQL_PASSWORD = ''
+COCKROACH_USER = 'root'
+COCKROACH_PASSWORD = ''
 
-NUMBER_OF_NODES = 1
+NUMBER_OF_NODES = 3
